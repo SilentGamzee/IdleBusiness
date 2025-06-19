@@ -1,0 +1,18 @@
+{
+    "name": "OLS.FeatureTemplate.Game",
+    "rootNamespace": "OLS",
+    "references": [
+        "GUID:d38397ece3fb26f4796b1cdd9456de3e",
+        "GUID:03c2f82dd13848d6802124adaa637c39",
+        "GUID:e59bf9fc7d5a44b18a819a92edd46163"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
