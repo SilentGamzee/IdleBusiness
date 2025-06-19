@@ -2,7 +2,7 @@
 
 namespace OLS.Features.IdleBlock.Data.Events
 {
-    public struct BlockUpgradeOperationEvent : IEventComponent
+    public struct UpgradeBlockOperationEvent : IEventComponent
     {
         public int EventEntityId { get; set; }
         public string SenderSystem { get; set; }

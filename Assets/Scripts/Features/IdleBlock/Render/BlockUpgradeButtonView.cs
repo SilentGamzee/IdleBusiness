@@ -25,4 +25,10 @@ public class BlockUpgradeButtonView : MonoBehaviour
     {
         _upgradeButton.interactable = isEnabled;
     }
+
+    public void SetUpgraded()
+    {
+        SetButtonEnabled(false);
+        _priceText.text = $"BOUGHT";
+    }
 }

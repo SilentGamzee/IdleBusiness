@@ -105,12 +105,12 @@ namespace OLS.Features.IdleBlock.Game.Base
 
             ref var idleBlockUpgradeBlocks = ref _idleBlockUpgradeBlocksPool.Add(blockEntityId);
             idleBlockUpgradeBlocks.UpgradeBlocksEntityIds =
-                InitUpgradeBlocksComponents(blockData.UpgradeDatas, world, upgradeIndexes);
+                InitUpgradeBlocksComponents(blockEntityId, blockData.UpgradeDatas, world, upgradeIndexes);
 
             return blockEntityId;
         }
 
-        private int[] InitUpgradeBlocksComponents(UpgradeData[] data, EcsWorld world, int[] upgradedIndexes)
+        private int[] InitUpgradeBlocksComponents(int idleBlockEntityId, UpgradeData[] data, EcsWorld world, int[] upgradedIndexes)
         {
             bool IsUpgraded(int blockIndex)
             {
@@ -134,14 +134,15 @@ namespace OLS.Features.IdleBlock.Game.Base
                 
                 ref var upgradeBlock = ref _upgradeBlockPool.Add(upgradeBlockEntityId);
                 upgradeBlock.EntityId = upgradeBlockEntityId;
-                upgradeBlock.BlockIndex = i;
+                upgradeBlock.IdleBlockEntityId = idleBlockEntityId;
+                upgradeBlock.UpgradeBlockIndex = i;
                 upgradeBlock.IsUpgraded = IsUpgraded(i);
                 upgradeBlock.IncomeMultiplier = upgradeData.IncomeMultiplier;
                 upgradeBlock.UpgradePrice = upgradeData.Price;
 
                 if (upgradeBlock.IsUpgraded)
                 {
-                    _eventsManagerSystem.SendEvent<BlockUpgradeOperationEvent, InitBlocksSystem>(upgradeBlockEntityId);
+                    _eventsManagerSystem.SendEvent<UpgradeBlockChangedEvent, InitBlocksSystem>(upgradeBlockEntityId);
                 }
 
                 upgradeBlocksEntityIds[i] = upgradeBlock.EntityId;
@@ -171,7 +172,7 @@ namespace OLS.Features.IdleBlock.Game.Base
 
         private void OnButtonUpgradeClick(int upgradeBlockEntityId)
         {
-            _eventsManagerSystem.SendEvent<BlockUpgradeOperationEvent, InitBlocksSystem>(upgradeBlockEntityId);
+            _eventsManagerSystem.SendEvent<UpgradeBlockOperationEvent, InitBlocksSystem>(upgradeBlockEntityId);
         }
     }
 }

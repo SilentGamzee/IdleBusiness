@@ -38,7 +38,7 @@ namespace OLS.Features.IdleBlock.Game.Post
                 var upgradeBlock = _upgradeBlocksPool.Get(upgradeBlocksEntityId);
                 if (upgradeBlock.IsUpgraded)
                 {
-                    upgradedBlocksIds.Add(upgradeBlock.BlockIndex);
+                    upgradedBlocksIds.Add(upgradeBlock.UpgradeBlockIndex);
                 }
             }
             

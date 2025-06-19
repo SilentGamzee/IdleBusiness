@@ -43,6 +43,7 @@ namespace OLS.Features.IdleBlock.Game
             return new IEcsSystem[]
             {
                 new BlockLevelUpOperationSystem(_eventsManagerSystem, _currencyManagerSystem),
+                new UpgradeBlockOperationSystem(_eventsManagerSystem, _currencyManagerSystem),
                 new BlockLevelChangedSystem(_eventsManagerSystem),
                 
                 new BlockIncomeCalculatorSystem(),
@@ -59,6 +60,7 @@ namespace OLS.Features.IdleBlock.Game
                 new BlockProgressRendererSystem(),
                 new BlockLevelUpRendererSystem(),
                 new BlockButtonsUpdateOnCurrencyChangeSystem(),
+                new UpgradeBlockChangedRendererSystem(),
                 new BlockSaveSystem(),
             };
         }
