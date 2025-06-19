@@ -16,6 +16,9 @@ namespace OLS.Features.Currency.Game.Base
             var currencyEntityId = currencyWorld.NewEntity();
             ref var currency = ref currencyWorld.GetPool<Data.Currency>().Add(currencyEntityId);
             currency.EntityId = currencyEntityId;
+            currency.Count = PlayerPrefs.HasKey(CurrencyConst.SoftCurrency)
+                ? PlayerPrefs.GetInt(CurrencyConst.SoftCurrency)
+                : 0;
 
             ref var currencyViewPointer = ref currencyWorld.GetPool<Data.CurrencyViewPointer>().Add(currencyEntityId);
             currencyViewPointer.CurrencyView = currencyView;

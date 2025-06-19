@@ -3,6 +3,7 @@
     public struct IdleBlock
     {
         public int EntityId { get; set; }
+        public int BlockIndex { get; set; }
         
         public int Level { get; set; }
         public int Income { get; set; }

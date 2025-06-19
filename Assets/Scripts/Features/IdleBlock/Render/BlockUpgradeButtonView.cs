@@ -21,8 +21,8 @@ public class BlockUpgradeButtonView : MonoBehaviour
     
     public int GetBlockIndex() => _blockIndex;
 
-    public void SetButtonDisabled()
+    public void SetButtonEnabled(bool isEnabled)
     {
-        _upgradeButton.interactable = false;
+        _upgradeButton.interactable = isEnabled;
     }
 }

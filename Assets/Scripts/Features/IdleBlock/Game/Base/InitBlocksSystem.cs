@@ -60,7 +60,7 @@ namespace OLS.Features.IdleBlock.Game.Base
 
                     var upgradeBlockEntityId = upgradeBlockEntityIds[j];
 
-                    ref var upgradeBlockViewPointer = ref upgradeBlockViewPointerPool.Get(upgradeBlockEntityId);
+                    ref var upgradeBlockViewPointer = ref upgradeBlockViewPointerPool.Add(upgradeBlockEntityId);
                     var upgradeBlock = idleBlock.GetBlockUpgradeByIndex(j);
                     upgradeBlock.Init($"{IdleBlockConst.UpgradeBlockPrefix} {j + 1}", upgradeData.IncomeMultiplier,
                         upgradeData.Price, () => OnButtonUpgradeClick(upgradeBlockEntityId));
@@ -68,7 +68,7 @@ namespace OLS.Features.IdleBlock.Game.Base
                     upgradeBlockViewPointer.View = upgradeBlock;
                 }
 
-                _eventsManagerSystem.SendEvent<BlockIncomeChanged, InitBlocksSystem>(blockEntityId);
+                _eventsManagerSystem.SendEvent<BlockChangedEvent, InitBlocksSystem>(blockEntityId);
             }
         }
 
@@ -91,9 +91,10 @@ namespace OLS.Features.IdleBlock.Game.Base
                 progress = 0;
                 upgradeIndexes = Array.Empty<int>();
             }
-
+            
             ref var idleBlock = ref _idleBlockPool.Add(blockEntityId);
             idleBlock.EntityId = blockEntityId;
+            idleBlock.BlockIndex = blockIndex;
             idleBlock.Level = level;
             idleBlock.BaseCost = blockData.BaseCost;
             idleBlock.BaseIncome = blockData.BaseIncome;
@@ -133,9 +134,15 @@ namespace OLS.Features.IdleBlock.Game.Base
                 
                 ref var upgradeBlock = ref _upgradeBlockPool.Add(upgradeBlockEntityId);
                 upgradeBlock.EntityId = upgradeBlockEntityId;
+                upgradeBlock.BlockIndex = i;
                 upgradeBlock.IsUpgraded = IsUpgraded(i);
                 upgradeBlock.IncomeMultiplier = upgradeData.IncomeMultiplier;
                 upgradeBlock.UpgradePrice = upgradeData.Price;
+
+                if (upgradeBlock.IsUpgraded)
+                {
+                    _eventsManagerSystem.SendEvent<BlockUpgradeOperationEvent, InitBlocksSystem>(upgradeBlockEntityId);
+                }
 
                 upgradeBlocksEntityIds[i] = upgradeBlock.EntityId;
             }
@@ -159,10 +166,12 @@ namespace OLS.Features.IdleBlock.Game.Base
 
         private void OnLevelUpClick(int blockEntityId)
         {
+            _eventsManagerSystem.SendEvent<BlockLevelUpOperationEvent, InitBlocksSystem>(blockEntityId);
         }
 
         private void OnButtonUpgradeClick(int upgradeBlockEntityId)
         {
+            _eventsManagerSystem.SendEvent<BlockUpgradeOperationEvent, InitBlocksSystem>(upgradeBlockEntityId);
         }
     }
 }

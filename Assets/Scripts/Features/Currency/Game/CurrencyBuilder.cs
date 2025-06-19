@@ -38,13 +38,17 @@ namespace OLS.Features.Currency.Game
         {
             return new IEcsSystem[]
             {
-                new CurrencyRenderSystem()
+               
             };
         }
 
         protected override IEcsSystem[] GetPostSystems()
         {
-            return new IEcsSystem[0];
+            return new IEcsSystem[]
+            {
+                new CurrencySaveSystem(),
+                new CurrencyRenderSystem()
+            };
         }
     }
 }

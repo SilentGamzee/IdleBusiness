@@ -46,7 +46,10 @@ namespace Core.Game
             //Systems
             var coreBuilder = new CoreServicesBuilder();
             var currencyBuilder = new CurrencyBuilder(coreBuilder.Get<EventsManagerSystem>());
-            var idleBlockBuilder = new IdleBlockBuilder(coreBuilder.Get<ContentManagerSystem>(), coreBuilder.Get<EventsManagerSystem>());
+            var idleBlockBuilder = new IdleBlockBuilder(
+                coreBuilder.Get<ContentManagerSystem>(),
+                coreBuilder.Get<EventsManagerSystem>(),
+                currencyBuilder.Get<CurrencyManagerSystem>());
 
             BuildFeatureBuilders(new List<FeatureBuilder>
             {
@@ -81,6 +84,7 @@ namespace Core.Game
                 featureBuilder.BuildMiddleSystems(_systems);
             }
 
+            featureBuilders.Reverse();
             foreach (var featureBuilder in featureBuilders)
             {
                 featureBuilder.BuildPostSystems(_systems);

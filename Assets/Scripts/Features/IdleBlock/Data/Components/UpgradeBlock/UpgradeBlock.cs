@@ -3,6 +3,7 @@
     public struct UpgradeBlock
     {
         public int EntityId { get; set; }
+        public int BlockIndex { get; set; }
         public bool IsUpgraded { get; set; }
         public int UpgradePrice { get; set; }
         public float IncomeMultiplier { get; set; }

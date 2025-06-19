@@ -13,13 +13,13 @@ public class CurrencyManagerSystem : IEcsInitSystem
     {
         _eventsManagerSystem = eventsManagerSystem;
     }
-    
+
     public void Init(IEcsSystems systems)
     {
         var currencyWorld = systems.GetWorld(CurrencyConst.Currency);
 
         _currencyPool = currencyWorld.GetPool<Currency>();
-
+        
         //Initial render update
         ref var currencyChangeEvent = ref _eventsManagerSystem.SendEvent<CurrencyChangeEvent, CurrencyManagerSystem>();
         currencyChangeEvent.Count = GetSoftCount();
@@ -30,7 +30,7 @@ public class CurrencyManagerSystem : IEcsInitSystem
         //TODO: In case of scaling, we can add logic for find by currency type
         //But in our case we have world with always 1 entity
         ref var currency = ref _currencyPool.Get(0);
-        currency.Count = Mathf.Min(0, currency.Count + count);
+        currency.Count = Mathf.Max(0, currency.Count + count);
 
         ref var currencyChangeEvent = ref _eventsManagerSystem.SendEvent<CurrencyChangeEvent, CurrencyManagerSystem>();
         currencyChangeEvent.Count = currency.Count;
