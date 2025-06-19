@@ -38,18 +38,22 @@ namespace OLS.Features.IdleBlock.Game.Base
 
             var blockResourcePrefab = _contentManager.Load<GameObject>(IdleBlockConst.BlockResourceName)
                 .GetComponent<IdleBlockView>();
+            
             var config = _contentManager.Load<IdleBlocksConfigSO>(IdleBlockConst.ConfigResourceName);
+            var configNames = _contentManager.Load<IdleBlockNamesConfigSO>(IdleBlockConst.ConfigNamesResourceName);
+            
             var containerTransform = Object.FindFirstObjectByType<BlocksContainerView>().transform;
             
             for (int i = 0; i < config.Blocks.Length; i++)
             {
                 var configData = config.Blocks[i];
+                var configNameData = configNames.IdleBlocksNames[i];
 
                 var blockEntityId = InitIdleBlockComponents(i, idleBlockWorld, configData);
 
                 ref var idleBlockViewPointer = ref idleBlockViewPointerPool.Add(blockEntityId);
                 var idleBlock = Object.Instantiate(blockResourcePrefab, containerTransform);
-                idleBlock.Init(configData.Name, 0, () => OnLevelUpClick(blockEntityId));
+                idleBlock.Init(configNameData.Name, () => OnLevelUpClick(blockEntityId));
                 idleBlockViewPointer.View = idleBlock;
 
                 var upgradeBlockEntityIds = _idleBlockUpgradeBlocksPool.Get(blockEntityId).UpgradeBlocksEntityIds;
@@ -57,12 +61,14 @@ namespace OLS.Features.IdleBlock.Game.Base
                 for (int j = 0; j < configData.UpgradeDatas.Length; j++)
                 {
                     var upgradeData = configData.UpgradeDatas[j];
+                    var upgradeBlockName = configNameData.UpgradeBlocksNames[j];
 
                     var upgradeBlockEntityId = upgradeBlockEntityIds[j];
 
                     ref var upgradeBlockViewPointer = ref upgradeBlockViewPointerPool.Add(upgradeBlockEntityId);
                     var upgradeBlock = idleBlock.GetBlockUpgradeByIndex(j);
-                    upgradeBlock.Init($"{IdleBlockConst.UpgradeBlockPrefix} {j + 1}", upgradeData.IncomeMultiplier,
+
+                    upgradeBlock.Init(upgradeBlockName, upgradeData.IncomeMultiplier,
                         upgradeData.Price, () => OnButtonUpgradeClick(upgradeBlockEntityId));
 
                     upgradeBlockViewPointer.View = upgradeBlock;

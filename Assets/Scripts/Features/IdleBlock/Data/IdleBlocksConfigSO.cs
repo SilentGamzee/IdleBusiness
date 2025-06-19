@@ -12,7 +12,6 @@ namespace OLS.Features.IdleBlock.Data
     [Serializable]
     public class BlockData
     {
-        public string Name;
         public float IncomeTime;
         public int BaseCost;
         public int BaseIncome;

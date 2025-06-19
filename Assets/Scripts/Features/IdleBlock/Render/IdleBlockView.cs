@@ -17,10 +17,9 @@ namespace OLS.Features.IdleBlock.Render
         [SerializeField] private Button _levelUpButton;
         [SerializeField] private List<BlockUpgradeButtonView> _blockUpgradeButtons;
 
-        public void Init(string blockName, int level, Action onLevelUpCallback)
+        public void Init(string blockName, Action onLevelUpCallback)
         {
             _blockName.text = blockName;
-            SetLevel(level);
             _levelUpButton.onClick.AddListener(() => onLevelUpCallback?.Invoke());
         }
 
