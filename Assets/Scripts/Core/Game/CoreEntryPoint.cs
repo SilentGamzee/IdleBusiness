@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Core.Feature;
 using Leopotam.EcsLite;
 using OLS.Features.CoreServices.Game;
+using OLS.Features.CoreServices.Game.Base;
+using OLS.Features.Currency.Game;
 using UnityEngine;
 
 namespace Core.Game
@@ -41,19 +43,14 @@ namespace Core.Game
             _systems = new EcsSystems(new EcsWorld());
 
             //Systems
-            var baseEcsSystemsBuilder = new CoreServicesBuilder();
+            var coreBuilder = new CoreServicesBuilder();
+            var currencyBuilder = new CurrencyBuilder(coreBuilder.GetSystem<EventsManagerSystem>());
 
-            //Worlds
-            baseEcsSystemsBuilder.BuildFeatureWorlds(_systems);
-            
-            //Base
-            baseEcsSystemsBuilder.BuildBaseSystems(_systems);
-
-            //Game
-            baseEcsSystemsBuilder.BuildMiddleSystems(_systems);
-
-            //Post
-            baseEcsSystemsBuilder.BuildPostSystems(_systems);
+            BuildFeatureBuilders(new List<FeatureBuilder>
+            {
+                coreBuilder,
+                currencyBuilder
+            });
 
             _systems.Init();
             isInited = true;
@@ -61,6 +58,11 @@ namespace Core.Game
 
         private void BuildFeatureBuilders(List<FeatureBuilder> featureBuilders)
         {
+            foreach (var featureBuilder in featureBuilders)
+            {
+                featureBuilder.PrecacheSystems();
+            }
+            
             foreach (var featureBuilder in featureBuilders)
             {
                 featureBuilder.BuildFeatureWorlds(_systems);

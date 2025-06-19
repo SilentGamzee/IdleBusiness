@@ -1,18 +1,20 @@
 {
-    "name": "OLS.Core.Game",
-    "rootNamespace": "",
+    "name": "OLS.Currency.Game",
+    "rootNamespace": "OLS",
     "references": [
-        "GUID:e59bf9fc7d5a44b18a819a92edd46163",
-        "GUID:ed363a4bee7756e4895ea524559b0b21",
+        "GUID:57ab2f2dcd3833345850dfd4b210caf3",
         "GUID:03c2f82dd13848d6802124adaa637c39",
-        "GUID:979e31b5dac61f642bd98f6c1c197a24"
+        "GUID:e59bf9fc7d5a44b18a819a92edd46163",
+        "GUID:7d5190e87c69ed74cab88fff45ee37f7",
+        "GUID:ed363a4bee7756e4895ea524559b0b21",
+        "GUID:821a5f75be1ff7047aa885de4cd10d00"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": true,
+    "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

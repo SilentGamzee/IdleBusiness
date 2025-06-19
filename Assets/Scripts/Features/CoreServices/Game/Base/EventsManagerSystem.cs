@@ -13,7 +13,7 @@ namespace OLS.Features.CoreServices.Game.Base
             eventsWorld = systems.GetWorld(CoreServicesConst.EventsWorld);
         }
 
-        public ref T SendEvent<T, TK>(int entityId) 
+        public ref T SendEvent<T, TK>(int entityId = -1) 
             where T : struct, IEventComponent
             where TK: IEcsSystem
         {

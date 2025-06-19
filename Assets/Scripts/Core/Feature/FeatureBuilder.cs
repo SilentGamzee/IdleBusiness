@@ -6,10 +6,58 @@ namespace Core.Feature
 {
     public abstract class FeatureBuilder
     {
+        private IEcsSystem[] _baseSystems;
+        private IEcsSystem[] _midSystems;
+        private IEcsSystem[] _postSystems;
+        
         protected abstract Dictionary<EcsWorld, string> GetFeatureWorlds();
         protected abstract IEcsSystem[] GetBaseSystems();
         protected abstract IEcsSystem[] GetMidSystems();
         protected abstract IEcsSystem[] GetPostSystems();
+
+        public T GetSystem<T>() where T : IEcsSystem
+        {
+            PrecacheSystems();
+            
+            foreach (var system in _baseSystems)
+            {
+                if (system is T tSystem)
+                {
+                    return tSystem;
+                }
+            }
+            
+            foreach (var system in _midSystems)
+            {
+                if (system is T tSystem)
+                {
+                    return tSystem;
+                }
+            }
+            
+            foreach (var system in _postSystems)
+            {
+                if (system is T tSystem)
+                {
+                    return tSystem;
+                }
+            }
+            
+            Debug.LogError($"Cannot find {nameof(T)} in {this.GetType()}");
+            return default;
+        }
+
+        public void PrecacheSystems()
+        {
+            if (_baseSystems != null)
+            {
+                return;
+            }
+            
+            _baseSystems = GetBaseSystems();
+            _midSystems = GetMidSystems();
+            _postSystems = GetPostSystems();
+        }
         
         public void BuildFeatureWorlds(EcsSystems ecsSystems)
         {
@@ -21,7 +69,7 @@ namespace Core.Feature
         
         public void BuildBaseSystems(EcsSystems ecsSystems)
         {
-            foreach (var baseSystem in GetBaseSystems())
+            foreach (var baseSystem in _baseSystems)
             {
                 ecsSystems.Add(baseSystem);
             }
@@ -29,7 +77,7 @@ namespace Core.Feature
 
         public void BuildMiddleSystems(EcsSystems ecsSystems)
         {
-            foreach (var middleSystem in GetMidSystems())
+            foreach (var middleSystem in _midSystems)
             {
                 ecsSystems.Add(middleSystem);
             }
@@ -37,7 +85,7 @@ namespace Core.Feature
 
         public virtual void BuildPostSystems(EcsSystems ecsSystems)
         {
-            foreach (var postSystem in GetPostSystems())
+            foreach (var postSystem in _postSystems)
             {
                 ecsSystems.Add(postSystem);
             }

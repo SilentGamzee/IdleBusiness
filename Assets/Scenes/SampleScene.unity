@@ -797,6 +797,7 @@ GameObject:
   - component: {fileID: 1047507379}
   - component: {fileID: 1047507381}
   - component: {fileID: 1047507380}
+  - component: {fileID: 1047507382}
   m_Layer: 5
   m_Name: BalanceBlock
   m_TagString: Untagged
@@ -862,6 +863,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1047507378}
   m_CullTransparentMesh: 1
+--- !u!114 &1047507382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047507378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ebad303492749c1b3060b22a30f7d59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 767603766}
 --- !u!1 &1222339941
 GameObject:
   m_ObjectHideFlags: 0
