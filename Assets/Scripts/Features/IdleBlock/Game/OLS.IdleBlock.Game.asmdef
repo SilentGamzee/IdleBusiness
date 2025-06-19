@@ -1,19 +1,20 @@
 {
-    "name": "OLS.Core.Game",
-    "rootNamespace": "",
+    "name": "OLS.IdleBlock.Game",
+    "rootNamespace": "OLS",
     "references": [
+        "GUID:c8bc81498a61af54293d8dd66f7088f7",
+        "GUID:03c2f82dd13848d6802124adaa637c39",
         "GUID:e59bf9fc7d5a44b18a819a92edd46163",
         "GUID:ed363a4bee7756e4895ea524559b0b21",
-        "GUID:03c2f82dd13848d6802124adaa637c39",
-        "GUID:979e31b5dac61f642bd98f6c1c197a24",
-        "GUID:3bd57154de5589e4c8f5e39be3f79c61"
+        "GUID:492aa8c4cb4aa7141baef950f8c68b7d",
+        "GUID:821a5f75be1ff7047aa885de4cd10d00"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": true,
+    "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

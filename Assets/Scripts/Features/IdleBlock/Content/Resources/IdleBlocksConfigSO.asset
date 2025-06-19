@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47082365a0584b5f9651b6c8989d932c, type: 3}
+  m_Name: IdleBlocksConfigSO
+  m_EditorClassIdentifier: 
+  Blocks:
+  - Name: Bussiness 1
+    IncomeTime: 3
+    BaseCost: 3
+    BaseIncome: 3
+    UpgradeDatas:
+    - Price: 50
+      IncomeMultiplier: 0.5
+    - Price: 400
+      IncomeMultiplier: 1
+  - Name: Bussiness 2
+    IncomeTime: 6
+    BaseCost: 40
+    BaseIncome: 40
+    UpgradeDatas:
+    - Price: 1200
+      IncomeMultiplier: 1
+    - Price: 4000
+      IncomeMultiplier: 2
+  - Name: Bussiness 3
+    IncomeTime: 10
+    BaseCost: 200
+    BaseIncome: 200
+    UpgradeDatas:
+    - Price: 6000
+      IncomeMultiplier: 1
+    - Price: 20000
+      IncomeMultiplier: 1.5
+  - Name: Bussiness 4
+    IncomeTime: 17
+    BaseCost: 1000
+    BaseIncome: 1000
+    UpgradeDatas:
+    - Price: 15000
+      IncomeMultiplier: 1
+    - Price: 50000
+      IncomeMultiplier: 2
+  - Name: Bussiness 5
+    IncomeTime: 30
+    BaseCost: 5000
+    BaseIncome: 5000
+    UpgradeDatas:
+    - Price: 100000
+      IncomeMultiplier: 2
+    - Price: 500000
+      IncomeMultiplier: 4

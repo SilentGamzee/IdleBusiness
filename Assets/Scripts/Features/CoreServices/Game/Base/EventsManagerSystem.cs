@@ -30,7 +30,7 @@ namespace OLS.Features.CoreServices.Game.Base
         {
             int entityId = pool.GetWorld().NewEntity();
             ref var res = ref pool.Add(entityId);
-            res.EntityId = entityId;
+            res.EventEntityId = entityId;
             return ref res;
         }
         

@@ -1,13 +1,11 @@
 ﻿using OLS.Features.CoreServices.Data;
 
-namespace OLS.Features.Currency.Data.Events
+namespace OLS.Features.IdleBlock.Data.Events
 {
-    public struct CurrencyChangeEvent : IEventComponent
+    public struct BlockProgressChanged : IEventComponent
     {
         public int EventEntityId { get; set; }
         public string SenderSystem { get; set; }
         public int SenderEntityId { get; set; }
-        
-        public int Count { get; set; }
     }
 }

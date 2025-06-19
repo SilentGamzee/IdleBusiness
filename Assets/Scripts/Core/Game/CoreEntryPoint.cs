@@ -5,6 +5,7 @@ using Leopotam.EcsLite;
 using OLS.Features.CoreServices.Game;
 using OLS.Features.CoreServices.Game.Base;
 using OLS.Features.Currency.Game;
+using OLS.Features.IdleBlock.Game;
 using UnityEngine;
 
 namespace Core.Game
@@ -44,12 +45,14 @@ namespace Core.Game
 
             //Systems
             var coreBuilder = new CoreServicesBuilder();
-            var currencyBuilder = new CurrencyBuilder(coreBuilder.GetSystem<EventsManagerSystem>());
+            var currencyBuilder = new CurrencyBuilder(coreBuilder.Get<EventsManagerSystem>());
+            var idleBlockBuilder = new IdleBlockBuilder(coreBuilder.Get<ContentManagerSystem>(), coreBuilder.Get<EventsManagerSystem>());
 
             BuildFeatureBuilders(new List<FeatureBuilder>
             {
                 coreBuilder,
-                currencyBuilder
+                currencyBuilder,
+                idleBlockBuilder
             });
 
             _systems.Init();

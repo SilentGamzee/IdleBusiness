@@ -9,20 +9,31 @@ namespace Core.Feature
         private IEcsSystem[] _baseSystems;
         private IEcsSystem[] _midSystems;
         private IEcsSystem[] _postSystems;
+
+        private List<IEcsSystem> _getCachedSystems = new();
         
         protected abstract Dictionary<EcsWorld, string> GetFeatureWorlds();
         protected abstract IEcsSystem[] GetBaseSystems();
         protected abstract IEcsSystem[] GetMidSystems();
         protected abstract IEcsSystem[] GetPostSystems();
 
-        public T GetSystem<T>() where T : IEcsSystem
+        public T Get<T>() where T : IEcsSystem
         {
             PrecacheSystems();
+
+            foreach (var system in _getCachedSystems)
+            {
+                if (system is T tSystem)
+                {
+                    return tSystem;
+                }
+            }
             
             foreach (var system in _baseSystems)
             {
                 if (system is T tSystem)
                 {
+                    _getCachedSystems.Add(tSystem);
                     return tSystem;
                 }
             }
@@ -31,6 +42,7 @@ namespace Core.Feature
             {
                 if (system is T tSystem)
                 {
+                    _getCachedSystems.Add(tSystem);
                     return tSystem;
                 }
             }
@@ -39,6 +51,7 @@ namespace Core.Feature
             {
                 if (system is T tSystem)
                 {
+                    _getCachedSystems.Add(tSystem);
                     return tSystem;
                 }
             }
